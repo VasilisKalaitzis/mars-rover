@@ -1,0 +1,9 @@
+.plateau-container {
+  height: 100%;
+  width: 100%;
+}
+
+.plateau-block {
+  border: 3px solid #1b2124;
+}
+/*# sourceMappingURL=Plateau.css.map */

@@ -1,7 +1,8 @@
 import {
   MODIFY_ENGINE_PROP,
   FETCH_ENGINE_DATA,
-  UPDATE_PLATEAU_STATE
+  UPDATE_PLATEAU_STATE,
+  MODIFY_VISUALS
 } from "./types";
 
 export const fetchEngineData = () => dispatch => {
@@ -11,11 +12,11 @@ export const fetchEngineData = () => dispatch => {
   });
 };
 
-export const updatePlateauState = (rovers, output) => dispatch => {
+export const updatePlateauState = (rovers, plateauState) => dispatch => {
   dispatch({
     type: UPDATE_PLATEAU_STATE,
     payload: {
-      output: output,
+      plateauState: plateauState,
       rovers: rovers
     }
   });
@@ -27,6 +28,28 @@ export const modifyEngineProp = (property, value) => dispatch => {
     payload: {
       property: property,
       value: value
+    }
+  });
+};
+
+export const activateVisuals = (plateauColumns, plateauRows) => dispatch => {
+  dispatch({
+    type: MODIFY_VISUALS,
+    payload: {
+      plateauColumns: plateauColumns,
+      plateauRows: plateauRows,
+      plateauVisual: 1
+    }
+  });
+};
+
+export const deactivateVisuals = () => dispatch => {
+  dispatch({
+    type: MODIFY_VISUALS,
+    payload: {
+      plateauColumns: 0,
+      plateauRows: 0,
+      plateauVisual: 0
     }
   });
 };

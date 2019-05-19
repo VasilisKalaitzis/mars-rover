@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACjB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;CACZ;;AACD,AAAA,cAAc,CAAC;EACb,MAAM,EAAE,iBAAiB;CAC1B",
+    "sources": [
+        "Plateau.scss"
+    ],
+    "names": [],
+    "file": "Plateau.css"
+}

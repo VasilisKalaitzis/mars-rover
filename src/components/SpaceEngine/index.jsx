@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   fetchEngineData,
-  updatePlateauState
+  updatePlateauState,
+  deactivateVisuals,
+  activateVisuals
 } from "../../actions/spaceEngineActions";
+import { CSSTransition } from "react-transition-group";
 
 import DialogBox from "../DialogBox";
+import Plateau from "../Plateau";
 import "../../css/SpaceEngine.css";
 
 class SpaceEngine extends Component {
@@ -15,8 +19,8 @@ class SpaceEngine extends Component {
 
   startOperation = feedback => {
     switch (feedback.action) {
-      case "send_rovers_wo_animation":
-        // output string doesn't need to be re-initialized as
+      case "send_rovers":
+        // plateauState string doesn't need to be re-initialized as
         // it is the result of the rovers!
         var rovers = [];
 
@@ -24,6 +28,8 @@ class SpaceEngine extends Component {
         var orders = feedback.text.split("\n");
         // get plateau's size
         var plateau = orders[0].split(" ");
+        plateau[0] = parseInt(plateau[0]);
+        plateau[1] = parseInt(plateau[1]);
 
         // while more lines exist, add rovers
         for (let i = 1; i < orders.length; i = i + 2) {
@@ -32,7 +38,11 @@ class SpaceEngine extends Component {
 
           let newHover = orders[i].split(" ");
           // check if input is correct
-          if (newHover.length === 3) {
+          if (
+            newHover.length === 3 &&
+            !isNaN(newHover[0]) &&
+            !isNaN(newHover[1])
+          ) {
             rovers.push(newHover);
             this.updateRovers(rovers);
 
@@ -58,6 +68,8 @@ class SpaceEngine extends Component {
           }
         }
 
+        // parameters: plataeu columns and height
+        this.props.activateVisuals(plateau[0], plateau[1]);
         break;
       default:
         break;
@@ -65,7 +77,7 @@ class SpaceEngine extends Component {
   };
 
   updateRovers(roversArray) {
-    // We could keep the output's previous state and update only the last rover.
+    // We could keep the plateauState's previous state and update only the last rover.
     // However, looping through every rover every time increases this function's versatility!
     // As a result, this function can be used even if the rovers move without an order
 
@@ -81,6 +93,11 @@ class SpaceEngine extends Component {
     var orientation = ["W", "S", "E", "N"];
     var orientationTrans = { W: 0, S: 1, E: 2, N: 3 };
 
+    //handle invalid Orientation by the user
+    if (orientationTrans[rover[2]] === undefined) {
+      console.log("Error: Invalid orientation given: " + rover);
+      rover[3] = "Error: Invalid orientation given";
+    }
     switch (movement) {
       case "L":
         // change the orientation by +1 (based on the orientation array, anticlockewise)
@@ -127,7 +144,23 @@ class SpaceEngine extends Component {
   render() {
     return (
       <div className="main-layout-grid">
-        <div className="main-container">{/* <RoverHandler /> */}</div>
+        {/* Plateau visual mode */}
+        <div className="main-container">
+          <CSSTransition
+            in={this.props.plateauVisual === 1}
+            classNames={"fade"}
+            unmountOnExit
+            timeout={500}
+          >
+            <Plateau
+              key="main-plateau"
+              container_class="dialog-box color-pallete1"
+              rovers={this.props.rovers}
+              columns={this.props.plateauColumns}
+              rows={this.props.plateauRows}
+            />
+          </CSSTransition>
+        </div>
 
         {/* INPUT BOX */}
         <div className="left-dialog">
@@ -150,12 +183,6 @@ class SpaceEngine extends Component {
                   type: "submit",
                   action: "send_rovers",
                   target_name: "commands"
-                },
-                {
-                  text: "Skip Animation",
-                  type: "submit",
-                  action: "send_rovers_wo_animation",
-                  target_name: "commands"
                 }
               ]}
             />
@@ -171,7 +198,7 @@ class SpaceEngine extends Component {
               header="Output"
               body={[
                 {
-                  text: this.props.output
+                  text: this.props.plateauState
                 }
               ]}
             />
@@ -183,11 +210,14 @@ class SpaceEngine extends Component {
 }
 
 const mapStateToProps = state => ({
-  output: state.spaceEngineReducer.output,
-  rovers: state.spaceEngineReducer.rovers
+  plateauState: state.spaceEngineReducer.plateauState,
+  rovers: state.spaceEngineReducer.rovers,
+  plateauVisual: state.spaceEngineReducer.plateauVisual,
+  plateauColumns: state.spaceEngineReducer.plateauColumns,
+  plateauRows: state.spaceEngineReducer.plateauRows
 });
 
 export default connect(
   mapStateToProps,
-  { fetchEngineData, updatePlateauState }
+  { fetchEngineData, updatePlateauState, activateVisuals, deactivateVisuals }
 )(SpaceEngine);

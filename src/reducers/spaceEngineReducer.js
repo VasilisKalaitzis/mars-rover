@@ -1,11 +1,13 @@
 import {
   MODIFY_ENGINE_PROP,
   FETCH_ENGINE_DATA,
-  UPDATE_PLATEAU_STATE
+  UPDATE_PLATEAU_STATE,
+  MODIFY_VISUALS
 } from "../actions/types";
 
 const initialState = {
-  output: "",
+  plateauVisual: 0,
+  plateauState: "",
   rovers: []
 };
 
@@ -19,7 +21,7 @@ export default function(state = initialState, action) {
       // the code snipsets that the reviewers will have to care about
       return {
         ...state,
-        output: action.payload.output,
+        plateauState: action.payload.plateauState,
         rovers: action.payload.rovers
       };
     case MODIFY_ENGINE_PROP:
@@ -27,6 +29,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         [action.payload.property]: action.payload.value
+      };
+    case MODIFY_VISUALS:
+      return {
+        ...state,
+        plateauVisual: action.payload.plateauVisual,
+        plateauColumns: action.payload.plateauColumns,
+        plateauRows: action.payload.plateauRows
       };
     default:
       return state;

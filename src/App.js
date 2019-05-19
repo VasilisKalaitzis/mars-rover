@@ -7,6 +7,8 @@ import SpaceEngine from "./components/SpaceEngine";
 import "./css/App.css";
 import "./css/Base.css";
 import "./css/DialogBox.css";
+import "./css/Transitions.css";
+import "./css/Plateau.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {

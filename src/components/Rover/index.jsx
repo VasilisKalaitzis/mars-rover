@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { TimelineMax } from "gsap/TweenMax";
 import PropTypes from "prop-types";
 
-import "../../css/Assistant.css";
+import "../../css/Rover.css";
 
 class Assistant extends Component {
   constructor(props) {
@@ -46,6 +46,12 @@ class Assistant extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.tipsTimer);
+    if (this.cubicTimeline !== null) {
+      this.cubicTimeline.kill();
+    }
+    if (this.wingsTimeline !== null) {
+      this.wingsTimeline.kill();
+    }
   }
 
   getCubicClass() {
@@ -162,7 +168,9 @@ Assistant.defaultProps = {
     visibility: 1,
     roaming: 0,
     tips: null,
-    persistent_tips: null
+    persistent_tips: null,
+    positionLeft: 0,
+    positionTop: 0
   }
 };
 

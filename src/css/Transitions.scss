@@ -1,0 +1,37 @@
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+/* TRANSITION GROUP 1 
+   simple fade */
+
+$transitionTime: 900ms;
+.fade-enter {
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: opacity $transitionTime, -webkit-transform $transitionTime;
+  transition: opacity $transitionTime, -webkit-transform $transitionTime;
+  transition: opacity $transitionTime, transform $transitionTime;
+  transition: opacity $transitionTime, transform $transitionTime,
+    -webkit-transform $transitionTime;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-transition: opacity $transitionTime, -webkit-transform $transitionTime;
+  transition: opacity $transitionTime, -webkit-transform $transitionTime;
+  transition: opacity $transitionTime, transform $transitionTime;
+  transition: opacity $transitionTime, transform $transitionTime,
+    -webkit-transform $transitionTime;
+}
