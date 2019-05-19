@@ -1,3 +1,14 @@
+Simple React & Redux application where the user has the ability to navigate rovers inside an array.
+
+Notes to the Reviewers: The answer to the assessment can be found in the SpaceEngine (functions startOperation, updateRovers, handleMovement) as well as to the Action/Reducers they are calling. You can totally skip the rest of the components!
+
+Components:
+
+- Dialog Box: Input and Output boxes
+- Plateau: Displays the NxJ array on the screen
+- Rover: Indicator of which of the array's records has been filled
+- SpaceEngine: The parent element that contains the core functionality
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
