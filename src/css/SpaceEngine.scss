@@ -1,0 +1,30 @@
+.mainGrid {
+  height: "100%";
+}
+.scrollableCell {
+  height: "auto";
+  overflow-y: "auto";
+}
+
+.main-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-template-areas:
+    "content content"
+    "leftbox rightbox";
+  grid-gap: 0px;
+  padding: 0px;
+  height: 100vh;
+}
+
+.main-container {
+  grid-area: content;
+  overflow-y: auto;
+}
+.left-dialog {
+  grid-area: leftbox;
+}
+.right-dialog {
+  grid-area: rightbox;
+}

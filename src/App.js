@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import SpaceEngine from "./components/SpaceEngine";
+
+import "./css/App.css";
+import "./css/Base.css";
+import "./css/DialogBox.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faStar,
+  faHourglassStart,
+  faTrophy,
+  faLevelUpAlt
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faStar, faHourglassStart, faTrophy, faLevelUpAlt);
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <div className="App color-pallete1">
+          <SpaceEngine />
+        </div>
+      </Provider>
+    );
+  }
 }
 
 export default App;

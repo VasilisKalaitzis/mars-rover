@@ -1,0 +1,42 @@
+.mainGrid {
+  height: "100%";
+}
+
+.scrollableCell {
+  height: "auto";
+  overflow-y: "auto";
+}
+
+.main-layout-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 2fr 1fr;
+      grid-template-rows: 2fr 1fr;
+      grid-template-areas: "content content" "leftbox rightbox";
+  grid-gap: 0px;
+  padding: 0px;
+  height: 100vh;
+}
+
+.main-container {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: content;
+  overflow-y: auto;
+}
+
+.left-dialog {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: leftbox;
+}
+
+.right-dialog {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: rightbox;
+}
+/*# sourceMappingURL=SpaceEngine.css.map */
